@@ -1,2 +1,2 @@
-# narayanPCMR.github.io
+#Web log
 Web Project Log
