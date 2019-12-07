@@ -499,83 +499,150 @@
 				</div>
 			</div>
 			
-			<h2>Default buttons binds</h2>
-			<table border="1">
-				<tr>
-					<th>Keyboard key</th>
-					<th>Gamepad button (PSX / XB)</th>
-				</tr>
+			<div class="row">
+				<div class="col-12">
+					<h2>Dictionary</h2>
+					<a href="test_extract.txt" target="_blank">Petscop dictionary words</a><br />
+					<a href="https://petscop.fandom.com/wiki/Gamepad_language/Vocabulary" target="_blank">Vocabulary on Petscop fandom</a><br />
+					
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-12">
+					<h2>Default buttons binds</h2>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-6">
+					<table class="table">
+						<tr>
+							<th>Keyboard key</th>
+							<th>Gamepad button (PSX / XB)</th>
+						</tr>
+						
+						<tr>
+							<td>Up arrow</td>
+							<td>Up button</td>
+						</tr>
+						
+						<tr>
+							<td>Down arrow</td>
+							<td>Down button</td>
+						</tr>
+						
+						<tr>
+							<td>Left arrow</td>
+							<td>Left button</td>
+						</tr>
+						
+						<tr>
+							<td>Right arrow</td>
+							<td>Right button</td>
+						</tr>
+						
+						<tr>
+							<td>Z key</td>
+							<td>Cross button / A button</td>
+						</tr>
+						
+						<tr>
+							<td>A key</td>
+							<td>Square button / X button</td>
+						</tr>
+						
+						<tr>
+							<td>X key</td>
+							<td>Circle button / B button</td>
+						</tr>
+						
+						<tr>
+							<td>S key</td>
+							<td>Triangle button / Y button</td>
+						</tr>
+						
+						<tr>
+							<td>Q key</td>
+							<td>L1 button</td>
+						</tr>
+						
+						<tr>
+							<td>W key</td>
+							<td>L2 button</td>
+						</tr>
+						
+						<tr>
+							<td>O key</td>
+							<td>R1 button</td>
+						</tr>
+						
+						<tr>
+							<td>P key</td>
+							<td>R2 button</td>
+						</tr>
+						
+						<tr>
+							<td>Enter key</td>
+							<td>L button / Select button</td>
+						</tr>
+						
+						<tr>
+							<td>S key</td>
+							<td>R button / Start button</td>
+						</tr>
+					</table>
+				</div>
 				
-				<tr>
-					<td>Up arrow</td>
-					<td>Up button</td>
-				</tr>
-				
-				<tr>
-					<td>Down arrow</td>
-					<td>Down button</td>
-				</tr>
-				
-				<tr>
-					<td>Left arrow</td>
-					<td>Left button</td>
-				</tr>
-				
-				<tr>
-					<td>Right arrow</td>
-					<td>Right button</td>
-				</tr>
-				
-				<tr>
-					<td>Z key</td>
-					<td>Cross button / A button</td>
-				</tr>
-				
-				<tr>
-					<td>A key</td>
-					<td>Square button / X button</td>
-				</tr>
-				
-				<tr>
-					<td>X key</td>
-					<td>Circle button / B button</td>
-				</tr>
-				
-				<tr>
-					<td>S key</td>
-					<td>Triangle button / Y button</td>
-				</tr>
-				
-				<tr>
-					<td>Q key</td>
-					<td>L1 button</td>
-				</tr>
-				
-				<tr>
-					<td>W key</td>
-					<td>L2 button</td>
-				</tr>
-				
-				<tr>
-					<td>O key</td>
-					<td>R1 button</td>
-				</tr>
-				
-				<tr>
-					<td>P key</td>
-					<td>R2 button</td>
-				</tr>
-				
-				<tr>
-					<td>Enter key</td>
-					<td>L button / Select button</td>
-				</tr>
-				
-				<tr>
-					<td>S key</td>
-					<td>R button / Start button</td>
-				</tr>
-			</table>
+				<div class="col-6">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Keyboard</th>
+								<th>Gamepad</th>
+								<th>Phoneme</th>
+							</tr>
+						</thead>
+						
+						<tbody id="list_phonemes_combo">
+							<tr>
+								<td>Enter</td>
+								<td>Select / Back / L</td>
+								<td>[Submit]</td>
+							</tr>
+							
+							<script>
+							//Very hacky indeed
+							for (var key in phonetrix) {
+								for (var secondary in phonetrix[key]) {
+									var row = document.createElement('tr');
+									var key_col = document.createElement('td');
+									var gp_col = document.createElement('td');
+									var phoneme_col = document.createElement('td');
+									
+									key_col.innerText = (key != "none" ? (ActualPetscopButtons[key].kb + " + ") : "") + ActualPetscopButtons[secondary].kb;
+									gp_col.innerText = (key != "none" ? (key+" + ") : "") + secondary;
+									phoneme_col.innerText = phonetrix[key][secondary];
+									
+									row.appendChild(key_col);
+									row.appendChild(gp_col);
+									row.appendChild(phoneme_col);
+									
+									$("#list_phonemes_combo").append(row);
+								}
+							}
+							</script>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-12 text-center">
+					<span>All graphics and dictionary from <a href="https://petscop.fandom.com/wiki/Gamepad_language" target="_blank">Petscop Fandom page</a></span><br />
+					<span>Sound effects from <a href="https://petscop.bandcamp.com/album/petscop-soundtrack" target="_blank">Petscop Soundtrack</a></span>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

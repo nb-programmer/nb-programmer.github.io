@@ -1,170 +1,85 @@
-Am
-down L2 cross 
-And
-R1 cross L2 square R2 start 
-Are
-cross L2 circle 
-Away
-L2 left L2 start R1 cross 
-Baby
-R2 triangle R1 cross R2 triangle R1 circle 
-Back
-R2 triangle square L1 down 
-Bad
-R2 triangle square R2 start 
-Be
-R2 triangle R1 circle 
-Become
-R2 triangle R1 circle L1 down start L2 cross 
-Being
-R2 triangle R1 circle R1 triangle L1 left 
-Bell
-R2 triangle left L2 triangle 
-Born
-R2 triangle R1 up L2 circle L2 square 
-Boss
-L2 triangle R1 circle L2 square start 
-Can
-L1 down down L2 square 
-Come
-L1 down start L2 cross 
-Could
-L1 down R1 right R2 start 
-Do
-R2 start R2 cross 
-Driver
-L1 up L2 circle up R2 down right 
-Driving
-L1 up L2 circle up R2 down R1 triangle L1 left 
-Family
-R2 up down L2 cross R1 triangle L2 triangle R1 circle 
-Fell
-R2 up left L2 triangle 
-For
-R2 up triangle L2 circle 
-Friend
-R2 up L2 circle left L2 square R2 start 
-Fuck
-R2 up L2 left L1 down 
-Funny
-R2 up L2 left L2 square R1 circle 
-Ha
-L2 down cross 
-Hell
-L2 down left L2 triangle 
-Hello
-L2 down left L2 triangle R1 up 
-Help
-L2 down left L2 triangle R2 square 
-Her
-L2 down right 
-Here
-L2 down R1 circle L2 circle 
-House
-square R2 cross L1 cross 
-I
-up 
-I'm
-up L2 cross 
-In
-R1 triangle L2 square 
-Investigate
-R1 triangle L2 square R2 down left L1 cross R2 circle R1 triangle L1 right R1 cross R2 circle 
-Is
-R1 triangle L1 cross 
-It
-R1 triangle R2 circle 
-Lost
-L2 triangle triangle L1 cross R2 circle 
-Lovely
-L2 triangle start R2 down L2 triangle R1 circle 
-Marvin
-L2 cross cross L2 circle R2 down R1 triangle L2 square 
-Me
-L2 cross R1 circle 
-Melody
-L2 cross left L2 triangle start R2 start R1 circle 
-Music
-L2 cross R1 circle R2 cross L1 square R1 triangle L1 down 
-New
-L2 square R2 cross 
-Next
-L2 square left L1 down L1 cross R2 circle 
-Nifty
-L2 square R1 triangle R2 up R2 circle R1 circle 
-No
-L2 square R1 up 
-Not
-L2 square cross R2 circle 
-OK
-R1 up L1 down R1 cross 
-One
-L2 start L2 left L2 square 
-Pall
-R2 square triangle L2 triangle 
-Play
-R2 square L2 triangle R1 cross 
-Player
-R2 square L2 triangle R1 cross right 
-Plays
-R2 square L2 triangle R1 cross L1 cross 
-Present
-R2 square L2 circle left L1 square left L2 square R2 circle 
-Press
-R2 square L2 circle left L1 cross 
-Put
-R1 right R2 circle 
-Remember
-L2 circle R1 circle L2 cross left L2 cross R2 triangle right 
-Right
-L2 circle up R2 circle 
-Room
-L2 circle R2 cross L2 cross 
-Sad
-L1 cross square R2 start 
-Seat
-L1 cross R1 circle R2 circle 
-She
-L1 triangle R1 circle 
-Sit
-L1 cross R1 triangle R2 circle 
-Smuggled
-L1 cross L2 cross L2 left L1 right L2 triangle R2 start 
-Son
-L1 cross L2 left L2 square 
-Sorry
-L1 cross cross L2 circle R1 circle 
-Stop
-L1 cross R2 circle cross R2 square 
-Thanks
-R2 left square L2 square L1 down L1 cross 
-The
-R2 right L2 left 
-There
-R2 right down L2 circle 
-This
-R2 right R1 triangle L1 cross 
-Tiara
-R2 circle R1 circle cross L2 circle start 
-Time
-R2 circle up L2 cross 
-Together
-R2 circle R2 cross L1 right left R2 left right 
-Too
-R2 circle R2 cross 
-Tripped
-L1 start L2 circle R1 triangle R2 square R2 circle 
-Wait
-L2 start R1 cross R2 circle 
-Waiting
-L2 start R1 cross R2 circle R1 triangle L1 left 
-We
-L2 start R1 circle 
-What
-L2 start L2 left R2 circle 
-Will
-L2 start R1 triangle L2 triangle 
-You
-L2 up R2 cross 
-Your
-L2 up R1 up L2 circle 
+Am - down L2 cross 
+And - R1 cross L2 square R2 start 
+Are - cross L2 circle 
+Away - L2 left L2 start R1 cross 
+Baby - R2 triangle R1 cross R2 triangle R1 circle 
+Back - R2 triangle square L1 down 
+Bad - R2 triangle square R2 start 
+Be - R2 triangle R1 circle 
+Become - R2 triangle R1 circle L1 down start L2 cross 
+Being - R2 triangle R1 circle R1 triangle L1 left 
+Bell - R2 triangle left L2 triangle 
+Born - R2 triangle R1 up L2 circle L2 square 
+Boss - L2 triangle R1 circle L2 square start 
+Can - L1 down down L2 square 
+Come - L1 down start L2 cross 
+Could - L1 down R1 right R2 start 
+Do - R2 start R2 cross 
+Driver - L1 up L2 circle up R2 down right 
+Driving - L1 up L2 circle up R2 down R1 triangle L1 left 
+Family - R2 up down L2 cross R1 triangle L2 triangle R1 circle 
+Fell - R2 up left L2 triangle 
+For - R2 up triangle L2 circle 
+Friend - R2 up L2 circle left L2 square R2 start 
+Fuck - R2 up L2 left L1 down 
+Funny - R2 up L2 left L2 square R1 circle 
+Ha - L2 down cross 
+Hell - L2 down left L2 triangle 
+Hello - L2 down left L2 triangle R1 up 
+Help - L2 down left L2 triangle R2 square 
+Her - L2 down right 
+Here - L2 down R1 circle L2 circle 
+House - square R2 cross L1 cross 
+I - up 
+I'm - up L2 cross 
+In - R1 triangle L2 square 
+Investigate - R1 triangle L2 square R2 down left L1 cross R2 circle R1 triangle L1 right R1 cross R2 circle 
+Is - R1 triangle L1 cross 
+It - R1 triangle R2 circle 
+Lost - L2 triangle triangle L1 cross R2 circle 
+Lovely - L2 triangle start R2 down L2 triangle R1 circle 
+Marvin - L2 cross cross L2 circle R2 down R1 triangle L2 square 
+Me - L2 cross R1 circle 
+Melody - L2 cross left L2 triangle start R2 start R1 circle 
+Music - L2 cross R1 circle R2 cross L1 square R1 triangle L1 down 
+New - L2 square R2 cross 
+Next - L2 square left L1 down L1 cross R2 circle 
+Nifty - L2 square R1 triangle R2 up R2 circle R1 circle 
+No - L2 square R1 up 
+Not - L2 square cross R2 circle 
+OK - R1 up L1 down R1 cross 
+One - L2 start L2 left L2 square 
+Pall - R2 square triangle L2 triangle 
+Play - R2 square L2 triangle R1 cross 
+Player - R2 square L2 triangle R1 cross right 
+Plays - R2 square L2 triangle R1 cross L1 cross 
+Present - R2 square L2 circle left L1 square left L2 square R2 circle 
+Press - R2 square L2 circle left L1 cross 
+Put - R1 right R2 circle 
+Remember - L2 circle R1 circle L2 cross left L2 cross R2 triangle right 
+Right - L2 circle up R2 circle 
+Room - L2 circle R2 cross L2 cross 
+Sad - L1 cross square R2 start 
+Seat - L1 cross R1 circle R2 circle 
+She - L1 triangle R1 circle 
+Sit - L1 cross R1 triangle R2 circle 
+Smuggled - L1 cross L2 cross L2 left L1 right L2 triangle R2 start 
+Son - L1 cross L2 left L2 square 
+Sorry - L1 cross cross L2 circle R1 circle 
+Stop - L1 cross R2 circle cross R2 square 
+Thanks - R2 left square L2 square L1 down L1 cross 
+The - R2 right L2 left 
+There - R2 right down L2 circle 
+This - R2 right R1 triangle L1 cross 
+Tiara - R2 circle R1 circle cross L2 circle start 
+Time - R2 circle up L2 cross 
+Together - R2 circle R2 cross L1 right left R2 left right 
+Too - R2 circle R2 cross 
+Tripped - L1 start L2 circle R1 triangle R2 square R2 circle 
+Wait - L2 start R1 cross R2 circle 
+Waiting - L2 start R1 cross R2 circle R1 triangle L1 left 
+We - L2 start R1 circle 
+What - L2 start L2 left R2 circle 
+Will - L2 start R1 triangle L2 triangle 
+You - L2 up R2 cross 
+Your - L2 up R1 up L2 circle 
