@@ -225,11 +225,10 @@
 			for (var action in ActualPetscopButtons) {
 				if (e.type == "keydown") {
 					if (ActualPetscopButtons[action].kb == e.key) {
-						if (!e.repeat)
+						if (!e.repeat && !e.altKey && !e.ctrlKey && !e.shiftKey) {
 							buttonAction(action);
-						
-						if (!e.altKey && !e.ctrlKey && !e.shiftKey)
 							e.preventDefault();
+						}
 						break;
 					}
 				} else if (e.type == "gamepadpress") {
@@ -504,6 +503,7 @@
 				<div class="col-12">
 					<h2>Dictionary</h2>
 					<a href="test_extract.txt" target="_blank">Petscop dictionary words</a><br />
+					<a href="static/json/petscop.json" target="_blank">JSON Format</a> of phonemes (you can customize this)<br />
 					<a href="https://petscop.fandom.com/wiki/Gamepad_language/Vocabulary" target="_blank">Vocabulary on Petscop fandom</a><br />
 					
 				</div>
