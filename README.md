@@ -1,2 +1,2 @@
-# Web log
-Web Project Log
+# Projects
+Web apps and games I made
