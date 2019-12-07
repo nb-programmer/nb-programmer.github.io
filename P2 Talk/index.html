@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<link type="text/css" href="static/css/bootstrap.min.css" rel="stylesheet" />
+		
+		<style>
+		@font-face {
+			font-family: 'PetscopWide';
+			src: url('static/fonts/PetscopWide.ttf');
+		}
+		
+		#game {
+			width: 80%;
+			margin-left: 10%;
+		}
+		</style>
+		
+		
+		<script type="text/javascript" src="static/js/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+		
+		<script type="text/javascript" src="static/js/resources.js"></script>
+		<script type="text/javascript" src="static/js/sprite.js"></script>
+		<script type="text/javascript" src="static/js/gui.js"></script>
+		
+		
+		<title>P2 Chat</title>
+		
+		
+		<script>
+		var canvas, context, loaded=false;
+		
+		var WordsFloating = new SpriteGroup(640, 300);
+		var ButtonFloating = new SpriteGroup(640, 300);
+		var HUDSprites = new SpriteGroup();
+		var UIElements = new SpriteGroup();
+		
+		//List of buttons pressed to be translated to phonetic
+		ButtonPressList = [];
+		
+		//Default settings
+		Settings = {
+			"ShowLivePhonemes": true,
+			"Dictionary": "static/json/petscop.json",
+			"__Dictionary": null,
+			"Role": "guardian",
+			"ButtonMap": ActualPetscopButtons
+		};
+		
+		function saveSettings() {
+			if (window.localStorage) {
+				for (var k in Settings) {
+					if (k.slice(0, 2) == "__") continue;
+					data = Settings[k];
+					
+					if (typeof(Settings[k]) != "string")
+						data = JSON.stringify(Settings[k]);
+					window.localStorage.setItem(k, data);
+				}
+			}
+		}
+		
+		function loadSettings() {
+			if (window.localStorage) {
+				for (var k in Settings) {
+					if (k.slice(0, 2) == "__") continue;
+					data = window.localStorage.getItem(k);
+					
+					if (data !== null && data !== undefined) {
+						if (typeof(Settings[k]) != "string")
+							data = JSON.parse(data);
+						Settings[k] = data;
+					}
+				}
+			}
+		}
+		
+		/* Convert button combinations to word from dictionary */
+		function decodeMessage(button_list) {
+			var modifierKey = null;
+			var PhonemeWordList = [];
+			
+			for (var i = 0; i < button_list.length;i++) {
+				button = button_list[i];
+				switch (button) {
+					//Modifier button
+					case "L1":
+					case "L2":
+					case "R1":
+					case "R2":
+						if (modifierKey == null)
+							modifierKey = button;
+						else {
+							PhonemeWordList.push(Phonemes.INVALID);
+							modifierKey = null;
+						}
+						break;
+					
+					//Buttons to input a phoneme
+					case "up":
+					case "down":
+					case "left":
+					case "right":
+					case "cross":
+					case "square":
+					case "circle":
+					case "triangle":
+					case "start":
+						let ph_val = modifierKey ? phonetrix[modifierKey][button] : phonetrix["none"][button];
+						
+						PhonemeWordList.push(ph_val);
+						
+						//Reset modifier state
+						modifierKey = null;
+						break;
+					default:
+				}
+			}
+			
+			return PhonemeWordList;
+		}
+		
+		
+		function playSendSound() {
+			switch (Settings.Role) {
+			case "belle":
+				Resources.Sounds.belle_send.replay();
+				break;
+			case "marvin":
+				Resources.Sounds.marvin_send.replay();
+				break;
+			case "guardian":
+			default:
+				Resources.Sounds.generic_send.replay();
+			}
+		}
+		
+		
+		
+		
+		
+		/* Sprite creators */
+		
+		function createFloatingButton(button) {
+			ButtonFloating.add(new Sprite(0, 0, Resources.Images[button], 2.0, 2.0));
+		}
+		
+		function createFloatingWord(word) {
+			var word_spr = new Sprite();
+			word_spr.numSteps = 0;
+			word_spr._texty = 0;
+			word_spr.word = word;
+			word_spr._moveUp_steps = 0;
+			
+			var sprListLen = WordsFloating.add(word_spr);
+			
+			//Push this and other previous words upwards
+			for (var i = 0;i < sprListLen;i++)
+				WordsFloating.sprList[i]._moveUp_steps = 60;
+			
+			word_spr.onStep = function() {
+				this.numSteps++;
+				
+				//Move up animation
+				if (this._moveUp_steps > 0)
+					this._texty -= Math.max((--this._moveUp_steps/20)-0.8, 0);
+				
+				
+				//Fade out
+				if (this.numSteps > 150)
+					this.image_alpha -= 0.04;
+				if (this.image_alpha <= 0)
+					this.destroy();
+			};
+			word_spr.onDraw = function(canvas, ctx) {
+				ctx.fillStyle = "white";
+				ctx.font = "22pt PetscopWide";
+				ctx.textAlign = "center";
+				ctx.save();
+				ctx.globalAlpha = Math.max(Math.min(this.image_alpha, 1), 0);
+				ctx.fillText(this.word, this.x, this.y+this._texty);
+				ctx.restore();
+			};
+			
+			playSendSound();
+		}
+		
+		function createGPConnectedSpr(gp_id) {
+			var gp_spr = new Sprite(canvas.width / 2, -50);
+			gp_spr.__gpid = gp_id;
+			gp_spr.numSteps = 0;
+			HUDSprites.add(gp_spr);
+			
+			gp_spr.onStep = function() {
+				this.numSteps++;
+				if (this.numSteps < 60) {
+					this.y -= (this.y - 72) / 15;
+				}
+				
+				if (this.numSteps >= 180) {
+					this.y -= (this.y + 50) / 15;
+				}
+			};
+			gp_spr.onDraw = function(canvas, ctx) {
+				ctx.fillStyle = "white";
+				ctx.font = "22pt PetscopWide";
+				ctx.textAlign = "center";
+				ctx.save();
+				ctx.globalAlpha = Math.max(Math.min(this.image_alpha, 1), 0);
+				ctx.fillText("Gamepad connected: " + this.__gpid, this.x, this.y);
+				ctx.restore();
+			};
+			
+			Resources.Sounds.connect.replay();
+		}
+		
+		
+		
+		function buttonHandler(e) {
+			for (var action in ActualPetscopButtons) {
+				if (e.type == "keydown") {
+					if (ActualPetscopButtons[action].kb == e.key) {
+						if (!e.repeat)
+							buttonAction(action);
+						
+						e.preventDefault();
+						break;
+					}
+				} else if (e.type == "gamepadpress") {
+					for (var j=0;j<ActualPetscopButtons[action].gp.length;j++) {
+						if (ActualPetscopButtons[action].gp[j] == e.button) {
+							buttonAction(action);
+							return;
+						}
+					}
+				}
+			}
+		}
+		
+		function gamepadHandler() {
+			for (var gpIdx in Gamepad) {
+				if (Gamepad[gpIdx].__btnHist === undefined)
+					Gamepad[gpIdx].__btnHist = [];
+				
+				for (var i=0;i<Gamepad[gpIdx].buttons.length;i++) {
+					if (Gamepad[gpIdx].__btnHist[i] === undefined)
+						Gamepad[gpIdx].__btnHist[i] = false;
+					
+					if (Gamepad[gpIdx].__btnHist[i] != Gamepad[gpIdx].buttons[i].pressed) {
+						if (Gamepad[gpIdx].buttons[i].pressed) {
+							buttonHandler({
+								"button": i,
+								"buttonState": Gamepad[gpIdx].buttons[i],
+								"gamepadIdx": gpIdx,
+								"type": "gamepadpress"
+							});
+						}
+					}
+					
+					Gamepad[gpIdx].__btnHist[i] = Gamepad[gpIdx].buttons[i].pressed;
+				}
+			}
+		}
+		
+		function buttonAction(action) {
+			if (!loaded) return;
+			
+			if (action == "select") {
+				if (ButtonPressList.length > 0) {
+					Resources.Sounds.tap.replay();
+					
+					let phonetic_list = decodeMessage(ButtonPressList).join("");
+					let word_spoken = Settings.__Dictionary !== null ? (Settings.__Dictionary[phonetic_list] || Settings.__Dictionary["-1"] || "Dictionary corrupted") : "Dictionary not loaded";
+					
+					//Clear the floating button icons
+					ButtonFloating.destroyAll();
+					
+					createFloatingWord(word_spoken);
+					
+					ButtonPressList = [];
+				}
+			} else {
+				ButtonPressList.push(action);
+				createFloatingButton(action);
+				Resources.Sounds.tap.replay();
+			}
+		}
+		
+		function update() {
+			//Gamepad API event manager wrapper
+			gamepadHandler();
+			
+			//Save current state of canvas
+			context.save();
+			
+			//Black BG
+			context.fillStyle = "black";
+			context.fillRect(0, 0, canvas.width, canvas.height);
+			
+			//White text
+			context.fillStyle = "white";
+			context.textAlign = "left";
+			context.font = "16pt Arial";
+			context.textAlign = "center";
+			
+			if (!loaded) {
+				//Resources not loaded
+				if (Resources.total > 0) {
+					loaded = Resources.loaded == Resources.total;
+					
+					if (loaded)
+						allResourcesLoaded();
+					
+					var progress = Resources.loaded / Resources.total;
+					context.fillText("Loading... (" + Math.round(progress*100) + "%)", canvas.width/2, canvas.height/2 + 50);
+					context.fillStyle = "#2ca";
+					context.fillRect(canvas.width/2 - 200, canvas.height/2 - 10, progress*400, 20);
+					context.strokeStyle = "#2bd";
+					context.strokeWidth = 3;
+					context.strokeRect(canvas.width/2 - 200, canvas.height / 2 - 10, 400, 20);
+				}
+			} else {
+				//Assist in typing by showing phonemes
+				if (ButtonPressList.length && Settings.ShowLivePhonemes) {
+					var msg = decodeMessage(ButtonPressList);
+					var phonetic_words = msg.join("-");
+					context.fillText(phonetic_words, ButtonFloating.x, ButtonFloating.y - 30);
+				}
+				
+				//Update sprites
+				WordsFloating.update();
+				ButtonFloating.update();
+				HUDSprites.update();
+				UIElements.update();
+				
+				//Render them
+				WordsFloating.draw(canvas, context);
+				ButtonFloating.draw(canvas, context);
+				HUDSprites.draw(canvas, context);
+				UIElements.draw(canvas, context);
+			}
+			
+			//Restore previous transformations
+			context.restore();
+			
+			//Wait for next frame
+			requestAnimationFrame(update);
+		}
+		
+		
+		function loadDict() {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", Settings.Dictionary);
+			xhr.send();
+			xhr.addEventListener('readystatechange', function(e) {
+				if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200)
+					Settings.__Dictionary = JSON.parse(xhr.responseText);
+			});
+		}
+		
+		function allResourcesLoaded() {
+			/* Setup UI */
+			var settingsBtn = new Button(canvas.width - 40, 8, 32, 32, Resources.Images.sett_ico);
+			settingsBtn.onClick = function() {
+				$("#settingsModal").modal()
+			};
+			UIElements.add(settingsBtn);
+			
+			
+			//When we type, the buttons are center aligned
+			ButtonFloating.onStep = function() {
+				var setPos = 0;
+				for (var i=0;i<this.sprList.length;i++) {
+					this.sprList[i].x = setPos;
+					setPos += (this.sprList[i].spr.width + 8) * this.sprList[i].image_xscale;
+				}
+				
+				//Center align
+				for (var i=0;i<this.sprList.length;i++)
+					this.sprList[i].x -= setPos / 2;
+			};
+		}
+		
+		function updateSettings() {
+			Settings.ShowLivePhonemes = $("#cb_show_phonemes")[0].checked;
+			Settings.Role = $("#sel_role").val();
+			saveSettings();
+		}
+		
+		function setupEventListeners() {
+			$("#cb_show_phonemes")[0].checked = Settings.ShowLivePhonemes;
+			$("#sel_role").val(Settings.Role);
+			
+			window.addEventListener("gamepadconnected", function(e) {
+				createGPConnectedSpr(e.gamepad.id);
+				Gamepad[e.gamepad.index] = e.gamepad;
+				});
+			window.addEventListener("gamepaddisconnected", function(e) {
+				Gamepad.splice(e.gamepad.index, 1);
+				});
+			
+			window.addEventListener('keydown', buttonHandler);
+			
+			CanvasRenderingContext2D.prototype.Mouse = {x: 0, y: 0};
+			window.addEventListener('mousemove', e => {
+				context.Mouse.x = canvas.width * (e.pageX - canvas.offsetLeft) / canvas.offsetWidth;
+				context.Mouse.y = canvas.height * (e.pageY - canvas.offsetTop) / canvas.offsetHeight;
+				
+				if (e.target == canvas)
+					for (var elem in UIElements.sprList)
+						if (UIElements.sprList[elem]._hitTest(context.Mouse.x, context.Mouse.y)) {
+							if (UIElements.sprList[elem]._mouseState == 0)
+								UIElements.sprList[elem]._mouseState = 1;
+						} else
+							UIElements.sprList[elem]._mouseState = 0;
+			}, false);
+			
+			window.addEventListener('mousedown', e => {
+				context.Mouse.x = canvas.width * (e.pageX - canvas.offsetLeft) / canvas.offsetWidth;
+				context.Mouse.y = canvas.height * (e.pageY - canvas.offsetTop) / canvas.offsetHeight;
+				
+				if (e.target == canvas)
+					if (e.button == 0)
+						for (var elem in UIElements.sprList)
+							if (UIElements.sprList[elem]._hitTest(context.Mouse.x, context.Mouse.y))
+								UIElements.sprList[elem]._mouseState = 2;
+			}, false);
+			
+			window.addEventListener('mouseup', function(e) {
+				context.Mouse.x = canvas.width * (e.pageX - canvas.offsetLeft) / canvas.offsetWidth;
+				context.Mouse.y = canvas.height * (e.pageY - canvas.offsetTop) / canvas.offsetHeight;
+				
+				if (e.button == 0) {
+					for (var elem in UIElements.sprList) {
+						if (UIElements.sprList[elem]._hitTest(context.Mouse.x, context.Mouse.y) && UIElements.sprList[elem]._mouseState==2) {
+							UIElements.sprList[elem].onClick();
+							UIElements.sprList[elem]._mouseState = 1;
+						}
+					}
+				}
+			}, false);
+			
+			$('#settingsModal').find('.form-control').on('change', updateSettings);
+		}
+		
+		function init() {
+			canvas = document.getElementById("game");
+			context = canvas.getContext("2d");
+			
+			loadSettings();
+			loadResources(ResFiles);
+			loadDict();
+			
+			setupEventListeners();
+			
+			requestAnimationFrame(update);
+		}
+		
+		window.addEventListener('load', init);
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<h1 class="text-center">Use keyboard / gamepad to talk!</h1>
+			<canvas id="game" width="1280" height="720"></canvas>
+		
+			<div class="modal fade" id="settingsModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Settings</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-10"><label for="cb_show_phonemes">Show live phonemes</label></div>
+								<div class="col-2"><input class="form-control" type="checkbox" id="cb_show_phonemes" /></div>
+							</div>
+							<div class="row">
+								<div class="col-6"><label for="sel_role">Role</label></div>
+								<div class="col-6">
+									<select class="form-control" type="checkbox" id="sel_role">
+										<option value="guardian">Guardian / Care</option>
+										<option value="belle">Belle</option>
+										<option value="marvin">Marvin</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<h2>Default buttons binds</h2>
+			<table border="1">
+				<tr>
+					<th>Keyboard key</th>
+					<th>Gamepad button (PSX / XB)</th>
+				</tr>
+				
+				<tr>
+					<td>Up arrow</td>
+					<td>Up button</td>
+				</tr>
+				
+				<tr>
+					<td>Down arrow</td>
+					<td>Down button</td>
+				</tr>
+				
+				<tr>
+					<td>Left arrow</td>
+					<td>Left button</td>
+				</tr>
+				
+				<tr>
+					<td>Right arrow</td>
+					<td>Right button</td>
+				</tr>
+				
+				<tr>
+					<td>Z key</td>
+					<td>Cross button / A button</td>
+				</tr>
+				
+				<tr>
+					<td>A key</td>
+					<td>Square button / X button</td>
+				</tr>
+				
+				<tr>
+					<td>X key</td>
+					<td>Circle button / B button</td>
+				</tr>
+				
+				<tr>
+					<td>S key</td>
+					<td>Triangle button / Y button</td>
+				</tr>
+				
+				<tr>
+					<td>Q key</td>
+					<td>L1 button</td>
+				</tr>
+				
+				<tr>
+					<td>W key</td>
+					<td>L2 button</td>
+				</tr>
+				
+				<tr>
+					<td>O key</td>
+					<td>R1 button</td>
+				</tr>
+				
+				<tr>
+					<td>P key</td>
+					<td>R2 button</td>
+				</tr>
+				
+				<tr>
+					<td>Enter key</td>
+					<td>L button / Select button</td>
+				</tr>
+				
+				<tr>
+					<td>S key</td>
+					<td>R button / Start button</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>
