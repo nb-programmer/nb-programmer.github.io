@@ -228,7 +228,8 @@
 						if (!e.repeat)
 							buttonAction(action);
 						
-						e.preventDefault();
+						if (!e.altKey && !e.ctrlKey && !e.shiftKey)
+							e.preventDefault();
 						break;
 					}
 				} else if (e.type == "gamepadpress") {
@@ -588,7 +589,7 @@
 						</tr>
 						
 						<tr>
-							<td>S key</td>
+							<td>F key</td>
 							<td>R button / Start button</td>
 						</tr>
 					</table>
