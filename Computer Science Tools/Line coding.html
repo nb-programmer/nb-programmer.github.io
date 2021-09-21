@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+		var canvas = null, ctx = null;
+		
+		var rail_size = 20;
+		var time_interval = 40;
+		
+		const level_0 = 0;
+		const level_plus = level_0 - rail_size;
+		const level_minus = level_0 + rail_size;
+		
+		function renderLevelBoundaries() {
+			ctx.save();
+			ctx.strokeStyle = "rgba(0,0,0,0.4)";
+			ctx.font = "10px Arial";
+			
+			//+ve and -ve rails
+			ctx.beginPath();
+			ctx.setLineDash([5, 5]);
+			ctx.moveTo(0, level_plus);
+			ctx.lineTo(canvas.width, level_plus);
+			ctx.moveTo(0, level_minus);
+			ctx.lineTo(canvas.width, level_minus);
+			ctx.stroke();
+			
+			ctx.textAlign = "end";
+			ctx.fillStyle = "red";
+			ctx.fillText("+ve", -3, level_plus);
+			ctx.fillStyle = "blue";
+			ctx.fillText("-ve", -3, level_minus);
+			
+			//0v rail
+			ctx.beginPath();
+			ctx.setLineDash([]);
+			ctx.moveTo(0, level_0);
+			ctx.lineTo(canvas.width, level_0);
+			ctx.stroke();
+			ctx.textAlign = "left";
+			ctx.fillStyle = "black";
+			ctx.fillText("0v", 3, level_0-3);
+			ctx.restore();
+		}
+		
+		function renderTimeIntervals(bit_stream) {
+			ctx.save();
+			ctx.fillStyle = "black";
+			ctx.textAlign = "center";
+			ctx.strokeStyle = "rgba(20,255,50,0.4)";
+			ctx.beginPath();
+			let bitstr_pos = 0;
+			for (let i = 0; i < canvas.width; i += time_interval) {
+				ctx.moveTo(i, 0);
+				ctx.lineTo(i, canvas.height);
+				
+				if (bit_stream) {
+					if (bitstr_pos < bit_stream.length)
+						ctx.fillText(Number(bit_stream[bitstr_pos]).toString(), i + time_interval/2, 12);
+					bitstr_pos++;
+				}
+			}
+			ctx.stroke();
+			ctx.restore();
+		}
+		
+		function renderNRZ(val) {
+			renderLevelBoundaries();
+			
+			ctx.fillText("NRZ", -6, level_0);
+			ctx.beginPath();
+			ctx.strokeStyle = "black";
+			ctx.setLineDash([]);
+			ctx.moveTo(0, level_0);
+			val.forEach((elem, i, arr) => {
+				let ypos = elem ? level_plus : level_0;
+				ctx.lineTo(i * time_interval, ypos);
+				ctx.lineTo((i+1) * time_interval, ypos);
+			});
+			ctx.stroke();
+		}
+		
+		function renderNRZL(val) {
+			renderLevelBoundaries();
+			
+			ctx.fillText("NRZ-L", -6, level_0);
+			ctx.beginPath();
+			ctx.strokeStyle = "black";
+			ctx.setLineDash([]);
+			ctx.moveTo(0, level_0);
+			val.forEach((elem, i, arr) => {
+				let ypos = elem ? level_minus : level_plus;
+				ctx.lineTo(i * time_interval, ypos);
+				ctx.lineTo((i+1) * time_interval, ypos);
+			});
+			ctx.stroke();
+		}
+		
+		function renderNRZI(val) {
+			renderLevelBoundaries();
+			
+			ctx.fillText("NRZ-I", -6, level_0);
+			ctx.beginPath();
+			ctx.strokeStyle = "black";
+			ctx.setLineDash([]);
+			ctx.moveTo(0, level_0);
+			let is_invert = false;
+			val.forEach((elem, i, arr) => {
+				//Do opposite if we have to invert
+				let ypos = (elem ^ is_invert) ? level_minus : level_plus;
+				//Invert if we have a 'one'
+				if (elem) is_invert = !is_invert;
+				
+				ctx.lineTo(i * time_interval, ypos);
+				ctx.lineTo((i+1) * time_interval, ypos);
+			});
+			ctx.stroke();
+		}
+		
+		function renderRZ(val) {
+			renderLevelBoundaries();
+			
+			ctx.fillText("RZ", -6, level_0);
+			ctx.beginPath();
+			ctx.strokeStyle = "black";
+			ctx.setLineDash([]);
+			ctx.moveTo(0, level_0);
+			val.forEach((elem, i, arr) => {
+				let ypos = elem ? level_plus : level_minus;
+				ctx.lineTo(i * time_interval, ypos);
+				ctx.lineTo((i+0.5) * time_interval, ypos);
+				ctx.lineTo((i+0.5) * time_interval, level_0);
+				ctx.lineTo((i+1) * time_interval, level_0);
+			});
+			ctx.stroke();
+		}
+		
+		function renderManchester(val) {
+			renderLevelBoundaries();
+			
+			ctx.fillText("Manchester", -6, level_0);
+			ctx.beginPath();
+			ctx.strokeStyle = "black";
+			ctx.setLineDash([]);
+			ctx.moveTo(0, level_0);
+			val.forEach((elem, i, arr) => {
+				let ypos_start = elem ? level_minus : level_plus;
+				let ypos_end = elem ? level_plus : level_minus;
+				ctx.lineTo(i * time_interval, ypos_start);
+				ctx.lineTo((i+0.5) * time_interval, ypos_start);
+				ctx.lineTo((i+0.5) * time_interval, ypos_end);
+				ctx.lineTo((i+1) * time_interval, ypos_end);
+			});
+			ctx.stroke();
+		}
+		
+		function renderDiffManchester(val) {
+			renderLevelBoundaries();
+			
+			ctx.fillText("Differential", -6, level_0-6);
+			ctx.fillText("Manchester", -6, level_0+6);
+			ctx.beginPath();
+			ctx.strokeStyle = "black";
+			ctx.setLineDash([]);
+			ctx.moveTo(0, level_0);
+			let is_invert = false;
+			val.forEach((elem, i, arr) => {
+				let ypos_start = (elem^is_invert) ? level_plus : level_minus;
+				let ypos_end = (elem^is_invert) ? level_minus : level_plus;
+				if (elem) is_invert = !is_invert;
+				ctx.lineTo(i * time_interval, ypos_start);
+				ctx.lineTo((i+0.5) * time_interval, ypos_start);
+				ctx.lineTo((i+0.5) * time_interval, ypos_end);
+				ctx.lineTo((i+1) * time_interval, ypos_end);
+			});
+			ctx.stroke();
+		}
+		
+		function renderAMI(val) {
+			renderLevelBoundaries();
+			
+			ctx.fillText("AMI", -6, level_0);
+			ctx.beginPath();
+			ctx.strokeStyle = "black";
+			ctx.setLineDash([]);
+			ctx.moveTo(0, level_0);
+			let is_invert = false;
+			val.forEach((elem, i, arr) => {
+				let ypos = elem ? (is_invert ? level_minus : level_plus) : level_0;
+				if (elem) is_invert = !is_invert;
+				ctx.lineTo(i * time_interval, ypos);
+				ctx.lineTo((i+1) * time_interval, ypos);
+			});
+			ctx.stroke();
+		}
+		
+		function renderPseudoTernary(val) {
+			renderLevelBoundaries();
+			
+			ctx.fillText("Pseudo", -6, level_0-6);
+			ctx.fillText("Ternary", -6, level_0+6);
+			ctx.beginPath();
+			ctx.strokeStyle = "black";
+			ctx.setLineDash([]);
+			ctx.moveTo(0, level_0);
+			let is_invert = false;
+			val.forEach((elem, i, arr) => {
+				let ypos = elem ? level_0 : (is_invert ? level_minus : level_plus);
+				if (!elem) is_invert = !is_invert;
+				ctx.lineTo(i * time_interval, ypos);
+				ctx.lineTo((i+1) * time_interval, ypos);
+			});
+			ctx.stroke();
+		}
+		
+		function renderCodings(val) {
+			if (!canvas || !ctx) return;
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			updateInputConfigs();
+			
+			let xMargin = 70;
+			let yMargin = rail_size + 24;
+			let yPadding = rail_size + 48;
+			
+			ctx.save();
+			ctx.translate(xMargin, 0);
+			renderTimeIntervals(val);
+			
+			ctx.textAlign = "end";
+			ctx.font = "12px Arial";
+			
+			ctx.translate(0, yMargin);
+			renderNRZ(val);
+			ctx.translate(0, yPadding);
+			renderNRZL(val);
+			ctx.translate(0, yPadding);
+			renderNRZI(val);
+			ctx.translate(0, yPadding);
+			renderRZ(val);
+			ctx.translate(0, yPadding);
+			renderManchester(val);
+			ctx.translate(0, yPadding);
+			renderDiffManchester(val);
+			ctx.translate(0, yPadding);
+			renderAMI(val);
+			ctx.translate(0, yPadding);
+			renderPseudoTernary(val);
+			ctx.restore();
+		}
+		
+		
+		function updateInputConfigs() {
+			time_interval = Number.parseInt(document.getElementById('in_interval_size').value);
+			document.getElementById('time_interval_current').innerText = time_interval.toString() + "px/bit";
+		}
+		
+		window.addEventListener('load', e => {
+			canvas = document.getElementById('codings');
+			ctx = canvas.getContext('2d');
+			renderCodings([]);
+		});
+		
+		function parseAndUpdate() {
+			let elem = document.getElementById('in_binary_data');
+			let val = elem.value;
+			val = val.split('').map(x=>Number.parseInt(x)!==0);
+			renderCodings(val);
+		}
+		
+		</script>
+	</head>
+	<body>
+		<div style="display: block">
+			<label for="in_binary_data">Binary input:</label>
+			<input id="in_binary_data" type="text" oninput="parseAndUpdate()" />
+			<label for="in_interval_size">Time Interval size:</label>
+			<input id="in_interval_size" type="range" min="10" max="128" value="40" oninput="parseAndUpdate()" /> <span id="time_interval_current"></span>
+		</div>
+		
+		<div style="display: block">
+			<canvas width="800" height="600" id="codings">Your Web browser does not support the 'canvas' element</canvas>
+		</div>
+	</body>
+</html>
