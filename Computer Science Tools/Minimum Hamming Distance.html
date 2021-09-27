@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+		function calculateHamming(h1, h2) {
+			let hamming_distance = 0;
+			for (let i = 0; i < Math.max(h1.length, h2.length); i++) {
+				let v1 = typeof h1[i] === 'undefined' ? false : h1[i];
+				let v2 = typeof h2[i] === 'undefined' ? false : h2[i];
+				let v_xor = v1 ^ v2;
+				hamming_distance += v_xor;
+			}
+			return hamming_distance;
+		}
+		
+		function calculateMinHamming(codewords) {
+			let min_ham = null;
+			let hamming_pairs = {};
+			
+			//Choose 2 from the whole, so total we get nC2 combinations
+			for (let i = 0; i < codewords.length; i++) {
+				for (let j = i + 1; j < codewords.length; j++) {
+					let h_dist = calculateHamming(codewords[i], codewords[j]);
+					if (min_ham===null) min_ham = h_dist;
+					min_ham = Math.min(min_ham, h_dist);
+					
+					if (typeof hamming_pairs[i] === 'undefined') hamming_pairs[i] = {};
+					hamming_pairs[i][j] = h_dist;
+				}
+			}
+			return {"min": min_ham, 'pairs': hamming_pairs};
+		}
+		
+		function parseAndUpdate() {
+			let elem = document.getElementById('in_code_words');
+			let val = elem.value;
+			let code_bools = [];
+			codewords = val.split('\n').filter((e,i,a)=>e.length);
+			codewords.forEach((e,i,a)=>code_bools.push(e.split('').map(x=>Number.parseInt(x)!==0).reverse()));
+			let h_out = calculateMinHamming(code_bools);
+			if (h_out.min === null) document.getElementById('out_min_hamming_distance').innerText = '-';
+			else {
+				document.getElementById('out_min_hamming_distance').innerText = h_out.min.toString();
+				
+				if (document.getElementById('in_auto_dmin').checked) {
+					document.getElementById('in_dmin_error').value = h_out.min.toString();
+					updateError(0);
+				}
+			}
+			
+			let all_h = document.getElementById('out_all_hamming_distance');
+			all_h.innerHTML = "";
+			for (let i in h_out.pairs) {
+				for (let j in h_out.pairs[i]) {
+					let li_elem = document.createElement('li');
+					li_elem.innerText = "d(" + codewords[i] + ", " + codewords[j] + ") = " + h_out.pairs[i][j].toString();
+					all_h.appendChild(li_elem);
+				}
+			}
+		}
+		
+		function updateError(updated_field) {
+			let elem_dmin = document.getElementById('in_dmin_error');
+			let elem_s = document.getElementById('in_detect_guarantee');
+			let elem_t = document.getElementById('in_correct_guarantee');
+			let dmin_val = Number.parseInt(elem_dmin.value); if (Number.isNaN(dmin_val)) dmin_val = 0;
+			let s_val = Number.parseInt(elem_s.value); if (Number.isNaN(s_val)) s_val = 0;
+			let t_val = Number.parseInt(elem_t.value); if (Number.isNaN(t_val)) t_val = 0;
+			
+			switch (updated_field) {
+			//dmin updated
+			case 0:
+				//Rearrange equations
+				var new_s = Math.max(0, Math.floor(dmin_val - 1));
+				var new_t = Math.max(0, Math.floor((dmin_val - 1) / 2));
+				elem_s.value = new_s.toString();
+				elem_t.value = new_t.toString();
+				break;
+			//s updated
+			case 1:
+				var new_dmin = Math.max(0, Math.floor(s_val + 1));
+				var new_t = Math.max(0, Math.floor((new_dmin - 1) / 2));
+				elem_dmin.value = new_dmin.toString();
+				elem_t.value = new_t.toString();
+				break;
+			//t updated
+			case 2:
+				var new_dmin = Math.max(0, 2 * Math.floor(t_val) + 1);
+				var new_s = Math.max(0, Math.floor(new_dmin - 1));
+				elem_dmin.value = new_dmin.toString();
+				elem_s.value = new_s.toString();
+				break;
+			}
+		}
+		</script>
+	</head>
+	<body>
+		<h1>Minimum Hamming Distance</h1>
+		
+		<div style="display: block">
+			<label for="in_code_words">Code words (one per line, minimum 2 code words):</label><br />
+			<textarea id="in_code_words" oninput="parseAndUpdate()" rows="10" cols="50"></textarea>
+		</div>
+		<div style="display: block">
+			<span>Minimum Hamming distance d<sub>min</sub> = </span><span id="out_min_hamming_distance">-</span>
+		</div>
+		<div style="display: block; border: 1px solid black">
+			<span>All hamming distances:</span><br/>
+			<ol id="out_all_hamming_distance"></ol>
+		</div>
+		<h2>Errors</h2>
+		<div style="display: block">
+			<span>Error detection and correction equations:</span>
+			<ul>
+				<li>d<sub>min</sub> = s + 1</li>
+				<li>d<sub>min</sub> = 2t + 1</li>
+			</ul>
+			<input id="in_auto_dmin" type="checkbox" checked /><label for="in_auto_dmin">Auto-update d<sub>min</sub></label>
+			<table>
+				<tr>
+					<td><label for="in_dmin_error">d<sub>min</sub>=</label></td>
+					<td><input id="in_dmin_error" type="text" value="0" oninput="updateError(0)" /></td>
+					<td>Minimum Hamming distance</td>
+				</tr>
+				<tr>
+					<td><label for="in_detect_guarantee">s=</label></td>
+					<td><input id="in_detect_guarantee" type="text" value="0" oninput="updateError(1)" /></td>
+					<td>Guaranteed error detections</td>
+				</tr>
+				<tr>
+					<td><label for="in_correct_guarantee">t=</label></td>
+					<td><input id="in_correct_guarantee" type="text" value="0" oninput="updateError(2)" /></td>
+					<td>Guaranteed error corrections</td>
+				</tr>
+			</table>
+			<span>If asked to get d<sub>min</sub> for "Detection of x errors <b>or</b> correction of y errors", choose the highest d<sub>min</sub> after checking both t and s.</span>
+		</div>
+	</body>
+</html>

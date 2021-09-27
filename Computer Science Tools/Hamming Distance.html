@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+		function calculateHamming(h1, h2) {
+			let hamming_distance = 0;
+			for (let i = 0; i < Math.max(h1.length, h2.length); i++) {
+				let v1 = typeof h1[i] === 'undefined' ? false : h1[i];
+				let v2 = typeof h2[i] === 'undefined' ? false : h2[i];
+				let v_xor = v1 ^ v2;
+				hamming_distance += v_xor;
+			}
+			return hamming_distance;
+		}
+		
+		function parseAndUpdate() {
+			let elem1 = document.getElementById('in_binary_data_1');
+			let elem2 = document.getElementById('in_binary_data_2');
+			let val1 = elem1.value;
+			let val2 = elem2.value;
+			val1 = val1.split('').map(x=>Number.parseInt(x)!==0).reverse();
+			val2 = val2.split('').map(x=>Number.parseInt(x)!==0).reverse();
+			let h_out = calculateHamming(val1, val2);
+			document.getElementById('out_hamming_distance').innerText = h_out.toString();
+		}
+		</script>
+	</head>
+	<body>
+		<h1>Hamming Distance</h1>
+		
+		<div style="display: block">
+			<label for="in_binary_data_1">First Binary input:</label>
+			<input id="in_binary_data_1" type="text" oninput="parseAndUpdate()" />
+			<label for="in_binary_data_2">Second Binary input:</label>
+			<input id="in_binary_data_2" type="text" oninput="parseAndUpdate()" />
+		</div>
+		<div style="display: block">
+			<span>Hamming distance: </span><span id="out_hamming_distance">-</span>
+		</div>
+	</body>
+</html>
