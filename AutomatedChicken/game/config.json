@@ -1,0 +1,128 @@
+{
+	"boot": {
+		"initSaveData": {
+			"saveVersion": 1.0,
+			"showIntroBox": true,
+			"currentLevel": "level1",
+			"completedLevels": []
+		}
+	},
+	"title": {
+		"copyright": {
+			"text": "\u00a92021-2022",
+			"color": "#111"
+		},
+		"sky": {
+			"color": "#0aa"
+		},
+		"starfield": {
+			"count": 20,
+			"star_rotation_vel": 1.5
+		},
+		"menu": {
+			"play": {
+				"text": "PLAY",
+				"skin": null
+			},
+			"settings": {
+				"text": "SETTINGS",
+				"skin": null
+			},
+			"credits": {
+				"text": "CREDITS",
+				"skin": null
+			}
+		}
+	},
+	
+	"gameplay": {
+		"sky": {
+			"color": "#2bb"
+		},
+		"gravity": 300
+	},
+	
+	"levels": {
+		"level1": {
+			"map_key": "level1",
+			"name": "Level 1\nTutorial",
+			"next": "level2",
+			"collision": {
+				"blank": 1,
+				"solid": 2,
+				"platform": 3,
+				"goal": 4,
+				"player_spawn": 5,
+				"death": 7
+			},
+			"data": {
+				"items": [
+					{"key": "TeleporterA", "properties": {"type": "A"}, "count": 1},
+					{"key": "TeleporterB", "properties": {"type": "B"}, "count": 1}
+				],
+				"triggers": {
+					"dialogbox": [
+						{
+							"event": "levelbegin",
+							"key": "intro",
+							"ifState": {"showIntroBox": true}
+						}
+					]
+				},
+				"dialogues": {
+					"intro": {
+						"pos": {
+							"x": 576,
+							"y": 320
+						},
+						"can_skip": true,
+						"on_finish": {"action": "setState", "data": {"showIntroBox": false}},
+						"script": [
+							{"type": "message", "data": "This is \"Pecker\" the chicken"},
+							{"type": "page"},
+							{"type": "message", "data": "It loves nothing more than seeds\n\n\nSeeds are life!\u2122"},
+							{"type": "page"},
+							{"type": "message", "data": "The objective is simple: Get to the other side, and find some seeds!"},
+							{"type": "page"},
+							{"type": "message", "data": "What's that? How to control Pecker?"},
+							{"type": "page"},
+							{"type": "message", "data": "That's the neat part. You can't!\n\nPecker is a dumb bird. It only knows how to walk forwards."},
+							{"type": "page"},
+							{"type": "message", "data": "Then how might you play this game, you may wonder...\n\nWell, this is a simulation game. You need to use the tools given to you to build a path for Pecker to reach the seeds."},
+							{"type": "page"},
+							{"type": "message", "data": "Once the path is formed, just press \"Start\" to see if Pecker makes it"}
+						]
+					}
+				}
+			}
+		},
+		
+		"level2": {
+			"map_key": "level2",
+			"name": "Level 2\nThe climb",
+			"next": "level3",
+			"collision": {
+				"blank": 1,
+				"solid": 2,
+				"platform": 3,
+				"goal": 4,
+				"player_spawn": 5,
+				"death": 7
+			},
+			"data": {
+				"items": [
+					{"key": "Stair", "properties": {"type": "up-right"}, "count": 10},
+					{"key": "Block", "properties": {}, "count": 10}
+				],
+				"triggers": {
+					"dialogbox": [
+						
+					]
+				},
+				"dialogues": {
+					
+				}
+			}
+		}
+	}
+}

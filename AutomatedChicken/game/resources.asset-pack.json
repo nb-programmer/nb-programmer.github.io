@@ -1,0 +1,38 @@
+{
+    "section1": {
+        "files": [
+            {
+                "url": "game/config.json",
+                "type": "json",
+                "key": "config"
+            },
+            {
+                "url": "game/scene/Credits.js",
+                "type": "sceneFile",
+                "key": "Credits"
+            },
+            {
+                "url": "game/scene/Gameplay.js",
+                "type": "sceneFile",
+                "key": "Gameplay"
+            },
+            {
+                "url": "game/scene/Settings.js",
+                "type": "sceneFile",
+                "key": "Settings"
+            },
+            {
+                "url": "game/scene/Titlescreen.js",
+                "type": "sceneFile",
+                "key": "Titlescreen"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false
+    }
+}

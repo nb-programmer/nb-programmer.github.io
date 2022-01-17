@@ -1,0 +1,158 @@
+{
+    "anims": [
+        {
+            "key": "ani_explosion1",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "spr_entities",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "spr_entities",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "spr_entities",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "spr_entities",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "spr_entities",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "spr_entities",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "spr_entities",
+                    "frame": 6,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "spr_entities",
+                    "frame": 7,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "spr_entities",
+                    "frame": 8,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "spr_entities",
+                    "frame": 9,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "spr_entities",
+                    "frame": 10,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "spr_entities",
+                    "frame": 11,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "spr_entities",
+                    "frame": 12,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 30,
+            "skipMissedFrames": true,
+            "hideOnComplete": true
+        },
+        {
+            "key": "ani_portal1",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "spr_entities",
+                    "frame": 16,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "spr_entities",
+                    "frame": 17,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 2,
+            "skipMissedFrames": true,
+            "repeat": -1
+        },
+        {
+            "key": "ani_portal2",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "spr_entities",
+                    "frame": 18,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "spr_entities",
+                    "frame": 19,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 2,
+            "skipMissedFrames": true,
+            "repeat": -1
+        },
+        {
+            "key": "ani_deleteitem",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "sim_play_state",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sim_play_state",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 0,
+            "skipMissedFrames": true
+        }
+    ],
+    "globalTimeScale": 1,
+    "meta": {
+        "app": "Phaser Editor 2D v3",
+        "contentType": "Phaser v3 Animations"
+    }
+}

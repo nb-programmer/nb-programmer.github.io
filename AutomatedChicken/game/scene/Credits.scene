@@ -1,0 +1,137 @@
+{
+    "id": "0dbb4db0-6b22-44c7-8441-f5019033bf20",
+    "sceneType": "SCENE",
+    "settings": {
+        "snapEnabled": true,
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Credits",
+        "borderWidth": 1152,
+        "borderHeight": 640
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "83d243c1-17fd-4c71-b352-a6455743405d",
+            "label": "phaser",
+            "components": [],
+            "texture": {
+                "key": "phaser"
+            },
+            "x": 224,
+            "y": 144,
+            "scaleX": 0.2,
+            "scaleY": 0.2
+        },
+        {
+            "type": "Text",
+            "id": "1fed5053-9d5d-44e9-a23c-5c098a33da06",
+            "label": "text",
+            "components": [],
+            "x": 160,
+            "y": 80,
+            "text": "Game Engine",
+            "align": "center",
+            "fontSize": "18px",
+            "stroke": "#000",
+            "shadow.offsetX": 2,
+            "shadow.offsetY": 2,
+            "shadow.fill": true
+        },
+        {
+            "type": "Text",
+            "id": "56dccac9-7fc3-4643-a9f5-fe62034d7191",
+            "label": "txt_back",
+            "scope": "CLASS",
+            "components": [],
+            "x": 518,
+            "y": 564,
+            "text": "Back",
+            "align": "center",
+            "fontSize": "48px",
+            "stroke": "#000000ff",
+            "strokeThickness": 1,
+            "shadow.offsetX": 2,
+            "shadow.offsetY": 2,
+            "shadow.stroke": true,
+            "shadow.blur": 2
+        },
+        {
+            "type": "Image",
+            "id": "bb618a5b-2975-4f10-9ca3-e45f2183cd99",
+            "label": "image",
+            "components": [],
+            "texture": {
+                "key": "pe2d"
+            },
+            "x": 96,
+            "y": 432,
+            "scaleX": 0.3,
+            "scaleY": 0.3
+        },
+        {
+            "type": "Text",
+            "id": "06ca1147-9f49-4fd2-962a-0b4be144d742",
+            "label": "text_1",
+            "components": [],
+            "x": 192,
+            "y": 400,
+            "text": "Phaser Editor 2D",
+            "fontFamily": "Arial",
+            "fontSize": "40px",
+            "stroke": "#000000ff",
+            "strokeThickness": 2
+        },
+        {
+            "type": "Text",
+            "id": "3d0bd8af-9b4d-446d-a0ed-02dbb06d3b24",
+            "label": "text_2",
+            "components": [],
+            "x": 144,
+            "y": 320,
+            "text": "Game Development",
+            "align": "center",
+            "fontSize": "18px",
+            "stroke": "#000",
+            "shadow.offsetX": 2,
+            "shadow.offsetY": 2,
+            "shadow.fill": true
+        },
+        {
+            "type": "Text",
+            "id": "84092cc9-eb33-4052-a100-e4a08a17317b",
+            "label": "text_3",
+            "components": [],
+            "x": 752,
+            "y": 80,
+            "text": "Assets",
+            "align": "center",
+            "fontSize": "18px",
+            "stroke": "#000",
+            "shadow.offsetX": 2,
+            "shadow.offsetY": 2,
+            "shadow.fill": true
+        },
+        {
+            "type": "Text",
+            "id": "8dc548c0-1037-4d63-9104-6b3ce72a12a4",
+            "label": "text_4",
+            "components": [],
+            "x": 592,
+            "y": 128,
+            "text": "BGM:\n\"Energy\" - Narayan Bandodker \n\"Entry of the Gladiators\" -\n      Reference MIDI: bitmidi.com\n      Mix: Narayan Bandodker\n\nSFX:\nNarayan Bandodker\nobsydianx (UI)\n\nFonts:\nwww.fontspace.com\n\nTileset:\ncypor.itch.io\n\nSee README for more details",
+            "fontSize": "22px",
+            "stroke": "#000",
+            "shadow.offsetX": 1,
+            "shadow.offsetY": 1,
+            "shadow.fill": true
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

@@ -1,0 +1,117 @@
+{
+    "anims": [
+        {
+            "key": "button_pink",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "button",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "button",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "button",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 0,
+            "skipMissedFrames": true,
+            "repeat": -1
+        },
+        {
+            "key": "button_blue",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "button",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "button",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "button",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 0,
+            "skipMissedFrames": true,
+            "repeat": -1
+        },
+        {
+            "key": "button_yellow",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "button",
+                    "frame": 6,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "button",
+                    "frame": 7,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "button",
+                    "frame": 8,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 0,
+            "skipMissedFrames": true,
+            "repeat": -1
+        },
+        {
+            "key": "button_green",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "button",
+                    "frame": 9,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "button",
+                    "frame": 10,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "button",
+                    "frame": 11,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 0,
+            "skipMissedFrames": true,
+            "repeat": -1
+        }
+    ],
+    "globalTimeScale": 1,
+    "meta": {
+        "app": "Phaser Editor 2D v3",
+        "contentType": "Phaser v3 Animations"
+    }
+}

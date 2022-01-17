@@ -1,0 +1,88 @@
+{
+    "id": "422d6913-de5e-4061-bcc2-18ec76ff5fb9",
+    "sceneType": "SCENE",
+    "settings": {
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Gameplay",
+        "borderWidth": 1152,
+        "borderHeight": 640
+    },
+    "displayList": [
+        {
+            "prefabId": "4714437b-ca94-4128-946b-f58b752b9fb0",
+            "id": "14a28ba5-1576-40c5-8e9e-75148a8be895",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "pecker",
+            "scope": "CLASS",
+            "components": [],
+            "x": 140,
+            "y": 184
+        },
+        {
+            "type": "Container",
+            "id": "2673b066-382c-462b-ac29-2ff781325ab2",
+            "label": "layer_useritems",
+            "scope": "CLASS",
+            "components": [],
+            "list": []
+        },
+        {
+            "type": "Container",
+            "id": "c28a33a7-067c-430e-b068-9844e8c9dcde",
+            "label": "layer_ui",
+            "scope": "CLASS",
+            "components": [],
+            "list": [
+                {
+                    "type": "Container",
+                    "id": "621d502d-ece9-4daa-a944-8d4e45e6e017",
+                    "label": "cnt_dboxes",
+                    "scope": "CLASS",
+                    "components": [],
+                    "list": []
+                },
+                {
+                    "prefabId": "6a904745-33d8-4267-855c-50158201dfc8",
+                    "id": "44cf3bc9-0adc-48ad-96f2-355faf33b328",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "toolHUD",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 576,
+                    "y": 0,
+                    "nestedPrefabs": []
+                }
+            ]
+        },
+        {
+            "type": "TileSprite",
+            "id": "2edcb74c-eee9-4d4b-b9b2-db912bd2b503",
+            "label": "tspr_bg",
+            "scope": "CLASS",
+            "components": [],
+            "texture": {
+                "key": "tex_bg_mtn"
+            },
+            "y": 640,
+            "originX": 0.2,
+            "originY": 1,
+            "width": 2000,
+            "height": 300,
+            "tilePositionY": 1
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

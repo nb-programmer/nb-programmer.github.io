@@ -1,0 +1,93 @@
+{
+    "id": "1023678a-d80b-4ce8-b3c9-1d13cf3e093f",
+    "sceneType": "PREFAB",
+    "settings": {
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1152,
+        "borderHeight": 640
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "d82de02f-f016-4c20-be99-80b3e386645c",
+            "label": "container_1",
+            "components": [],
+            "list": [
+                {
+                    "type": "Rectangle",
+                    "id": "08eea4e0-0180-42d8-9c2f-88674207fad5",
+                    "label": "rct_placeholder",
+                    "components": [],
+                    "isFilled": true,
+                    "fillColor": "#888",
+                    "width": 400,
+                    "height": 180
+                },
+                {
+                    "type": "Text",
+                    "id": "f22784d4-d6ab-41b3-9fa5-f44a9aa7aca8",
+                    "label": "dlg_proceed",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 185,
+                    "y": 60,
+                    "originX": 1,
+                    "text": "Proceed",
+                    "align": "center",
+                    "shadow.offsetX": 2,
+                    "shadow.offsetY": 2,
+                    "shadow.fill": true
+                },
+                {
+                    "type": "Text",
+                    "id": "e8ecdd16-9e38-45ff-96ef-8f948702e712",
+                    "label": "dlg_text",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": -189,
+                    "y": -78,
+                    "text": "Dialog text",
+                    "fontSize": "20px",
+                    "shadow.offsetX": 2,
+                    "shadow.offsetY": 2,
+                    "shadow.fill": true
+                },
+                {
+                    "type": "Text",
+                    "id": "cd0c5da6-7037-4c61-a724-c53668ec4191",
+                    "label": "dlg_skip",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": -185,
+                    "y": 60,
+                    "text": "Skip",
+                    "align": "center",
+                    "shadow.offsetX": 2,
+                    "shadow.offsetY": 2,
+                    "shadow.fill": true
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    },
+    "prefabProperties": [
+        {
+            "name": "boxtext",
+            "label": "Dialog Text",
+            "tooltip": "Text that will be shown in the dialog box",
+            "defValue": "Default text",
+            "customDefinition": false,
+            "type": {
+                "id": "string"
+            }
+        }
+    ]
+}

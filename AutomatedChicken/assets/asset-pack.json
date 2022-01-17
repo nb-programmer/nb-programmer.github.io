@@ -1,0 +1,220 @@
+{
+    "section1": {
+        "files": [
+            {
+                "url": "assets/snd/ingame.xm",
+                "type": "binary",
+                "key": "bgm_ingame"
+            },
+            {
+                "url": "assets/snd/Entry of the Gladiators (Chicken ver.).xm",
+                "type": "binary",
+                "key": "bgm_title"
+            },
+            {
+                "url": "assets/img/button.png",
+                "frameConfig": {
+                    "frameWidth": 256,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "button"
+            },
+            {
+                "url": "assets/anim/button.json",
+                "type": "animation",
+                "key": "buttonanim"
+            },
+            {
+                "url": "assets/anim/chicken.json",
+                "type": "animation",
+                "key": "chickenanim"
+            },
+            {
+                "url": [
+                    "assets/entity/DialogBox.js",
+                    "assets/entity/Chicken.js",
+                    "assets/entity/ToolHUD.js",
+                    "assets/entity/LevelClear.js",
+                    "assets/entity/Teleporter.js",
+                    "assets/entity/TNT.js"
+                ],
+                "type": "scripts",
+                "key": "entities_scr"
+            },
+            {
+                "url": "assets/anim/entities.json",
+                "type": "animation",
+                "key": "explosionanim"
+            },
+            {
+                "url": "assets/level/level1.json",
+                "type": "tilemapTiledJSON",
+                "key": "level1"
+            },
+            {
+                "url": "assets/level/level2.json",
+                "type": "tilemapTiledJSON",
+                "key": "level2"
+            },
+            {
+                "url": "assets/img/title.png",
+                "type": "image",
+                "key": "logo"
+            },
+            {
+                "url": [
+                    "assets/plugins/modplayer/utils.js",
+                    "assets/plugins/modplayer/ft2.js",
+                    "assets/plugins/modplayer/pt.js",
+                    "assets/plugins/modplayer/st3.js",
+                    "assets/plugins/modplayer/player.js"
+                ],
+                "type": "scripts",
+                "key": "modplayer_scr"
+            },
+            {
+                "url": "assets/img/pe2d.png",
+                "type": "image",
+                "key": "pe2d"
+            },
+            {
+                "url": "assets/img/phaser.png",
+                "type": "image",
+                "key": "phaser"
+            },
+            {
+                "url": "assets/img/sim_state.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "sim_play_state"
+            },
+            {
+                "url": [
+                    "assets/snd/ui/confirm_style_2_002.wav"
+                ],
+                "type": "audio",
+                "key": "snd_btn_dialog_click"
+            },
+            {
+                "url": [
+                    "assets/snd/ui/confirm_style_2_001.wav"
+                ],
+                "type": "audio",
+                "key": "snd_btn_generic_click"
+            },
+            {
+                "url": [
+                    "assets/snd/death.wav"
+                ],
+                "type": "audio",
+                "key": "snd_death"
+            },
+            {
+                "url": [
+                    "assets/snd/explode.wav"
+                ],
+                "type": "audio",
+                "key": "snd_explode"
+            },
+            {
+                "url": [
+                    "assets/snd/fanfare.wav"
+                ],
+                "type": "audio",
+                "key": "snd_fanfare"
+            },
+            {
+                "url": [
+                    "assets/snd/pop.wav"
+                ],
+                "type": "audio",
+                "key": "snd_pop"
+            },
+            {
+                "url": [
+                    "assets/snd/teleport.wav"
+                ],
+                "type": "audio",
+                "key": "snd_teleport"
+            },
+            {
+                "url": "assets/img/chicken.png",
+                "frameConfig": {
+                    "frameWidth": 48,
+                    "frameHeight": 48,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "spr_chicken"
+            },
+            {
+                "url": "assets/img/entities.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "spr_entities"
+            },
+            {
+                "url": "assets/img/star.png",
+                "type": "image",
+                "key": "spr_star"
+            },
+            {
+                "url": "assets/img/basic-platformer-tileset/[BACKGROUND] Tree bg.png",
+                "type": "image",
+                "key": "tex_bg_mtn"
+            },
+            {
+                "url": "assets/img/basic-platformer-tileset/[TILESET] Tileset.png",
+                "type": "image",
+                "key": "ts_ground"
+            },
+            {
+                "url": "assets/img/basic-platformer-tileset/[BACKGROUND] Bottom sky.png",
+                "type": "image",
+                "key": "ts_sky0"
+            },
+            {
+                "url": "assets/img/basic-platformer-tileset/[BACKGROUND] Top sky.png",
+                "type": "image",
+                "key": "ts_sky1"
+            },
+            {
+                "url": [
+                    "assets/js/ui.js",
+                    "assets/js/gameobj.js"
+                ],
+                "type": "scripts",
+                "key": "UserComponent"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false
+    }
+}
